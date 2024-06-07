@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-screen">
     <img
-      class="hidden lg:block w-1/2"
+      class="hidden lg:block w-[40%]"
       src="https://schooltry-tertiary-2.s3.eu-west-1.amazonaws.com/institutionBanners/Unilorin_081084832221708299447.jpg"
       alt="Unilorin Banner"
     />
@@ -16,19 +16,15 @@
         <h1>University of Ilorin</h1>
       </div>
 
-      <form
-        method="post"
-        class="mt-20 w-[75%] space-y-10"
-        @submit.prevent="onSubmit"
-      >
+      <form class="mt-20 w-[75%] space-y-10" @submit.prevent="onSubmit">
         <h3 class="text-xl">Enter your details below.</h3>
         <input
           type="text"
           class="border w-full px-4 py-2"
           v-model="id"
-          placeholder="Matric. Number"
+          placeholder="Username"
         />
-        <PasswordInput @password-entered="handlePassword" />
+        <PasswordInput ref="passwordInput" @password-entered="handlePassword" />
 
         <div class="text-right cursor-pointer text-uil-500 hover:text-uil-400">
           Forgot Password?
@@ -45,31 +41,57 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import PasswordInput from "@/components/PasswordInput.vue";
+import axios from "axios";
 
 const id = ref("");
-let enteredPassword = ref("");
+const password = ref("");
+const passwordInput = ref(null);
+
+const router = useRouter();
 const toast = useToast();
 
-const handlePassword = (password) => {
-  enteredPassword = password;
+const handlePassword = (value) => {
+  password.value = value;
 };
 
-const onSubmit = () => {
-  if (!id.value || !enteredPassword) {
+const onSubmit = async () => {
+  if (!id.value || !password.value) {
     toast.error("Both fields must be filled");
     return;
   }
 
   const userDetails = {
-    id: id.value,
-    password: enteredPassword,
+    username: id.value,
+    password: password.value,
   };
-  console.log(userDetails);
 
-  id.value = "";
-  // enteredPassword = "";
+  try {
+    const { data } = await axios.post(
+      "http://localhost:5000/api/v1/auth/login",
+      userDetails
+    );
+    const token = data.access_token;
+    localStorage.setItem("accessToken", token);
+    router.push({ name: "Dashboard" });
+  } catch (error) {
+    if (error && error.response && error.response.data) {
+      console.error(error.response.data);
+    } else {
+      console.error("Login failed", error);
+    }
+    toast.error("Login failed. Please try again.");
+  } finally {
+    id.value = "";
+    if (
+      passwordInput.value &&
+      typeof passwordInput.value.clearPassword === "function"
+    ) {
+      passwordInput.value.clearPassword();
+    }
+  }
 };
 </script>

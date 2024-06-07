@@ -32,7 +32,11 @@ const toggleVisibility = () => {
 
 const handlePassword = () => {
   emit("passwordEntered", password.value);
-  // console.log(password.value);
-  // password.value = "";
 };
+
+const clearPassword = () => {
+  password.value = "";
+};
+
+defineExpose({ clearPassword });
 </script>
