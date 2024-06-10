@@ -9,6 +9,12 @@ import PaymentFail from "./components/PaymentFail.vue";
 import PaymentSuccess from "./components/PaymentSuccess.vue";
 import UserProfile from "./components/UserProfile.vue";
 import NotFound from "./components/NotFound.vue";
+import AdminDashboard from "./views/AdminDashboard.vue";
+// import PaymentsDashboard from "./components/PaymentsDashboard.vue";
+import RegistrationsDashboard from "./components/RegistrationsDashboard.vue";
+import SkillsDashboard from "./components/SkillsDashboard.vue";
+import StudentsDashboard from "./components/StudentsDashboard.vue";
+import TrainersDashboard from "./components/TrainersDashboard.vue";
 
 // Define route components
 const routes = [
@@ -58,6 +64,19 @@ const routes = [
     path: "/profile",
     name: "Userprofile",
     component: UserProfile,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin",
+    component: AdminDashboard,
+    children: [
+      { path: "skills", component: SkillsDashboard },
+      { path: "trainers", component: TrainersDashboard },
+      { path: "students", component: StudentsDashboard },
+      { path: "registrations", component: RegistrationsDashboard },
+      // { path: "payments", component: PaymentsDashboard },
+      { path: "", redirect: "/admin/skills" },
+    ],
     meta: { requiresAuth: true },
   },
   {

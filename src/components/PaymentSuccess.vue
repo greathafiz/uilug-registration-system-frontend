@@ -13,9 +13,15 @@
         <p class="text-gray-700 mb-4">{{ skill.description }}</p>
 
         <h3 class="text-xl font-bold mb-2">Trainer Details</h3>
-        <p class="text-gray-700">Name: {{ skill.trainer.trainer_name }}</p>
-        <p class="text-gray-700">Email: {{ skill.trainer.email }}</p>
-        <p class="text-gray-700">Phone: {{ skill.trainer.phone_number }}</p>
+        <p class="text-gray-700">
+          <strong>Name: </strong>{{ skill.trainer.trainer_name }}
+        </p>
+        <p class="text-gray-700">
+          <strong>Email:</strong> {{ skill.trainer.email }}
+        </p>
+        <p class="text-gray-700">
+          <strong>Phone:</strong> {{ skill.trainer.phone_number }}
+        </p>
 
         <a
           :href="skill.trainer.whatsappLink"
@@ -25,7 +31,7 @@
         </a>
         <a
           href="/dashboard"
-          class="bg-uil-400 text-white py-2 px-4 rounded mt-4 block text-center hover:bg-uil-500 cursor-pointer"
+          class="py-2 px-4 rounded mt-4 block text-center hover:bg-gray-200 cursor-pointer"
         >
           Go Back to Dashboard
         </a>

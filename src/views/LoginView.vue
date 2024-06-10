@@ -12,8 +12,9 @@
         src="https://schooltry-tertiary-2.s3.eu-west-1.amazonaws.com/institutionLogos/Unilorin_6500995e76d79.jpeg"
         alt="Unilorin Logo"
       />
-      <div class="text-3xl">
-        <h1>University of Ilorin</h1>
+      <div class="text-3xl flex justify-center items-center flex-col">
+        <h1 class="text-4xl">University of Ilorin</h1>
+        <h2 class="text-2xl">GSE 301 Registration Portal</h2>
       </div>
 
       <form class="mt-20 w-[75%] space-y-10" @submit.prevent="onSubmit">
@@ -75,8 +76,16 @@ const onSubmit = async () => {
       userDetails
     );
     const token = data.access_token;
+    const role = data.roles;
+
     localStorage.setItem("accessToken", token);
-    router.push({ name: "Dashboard" });
+    localStorage.setItem("userRole", role);
+
+    if (role === "admin") {
+      router.push("/admin");
+    } else if (role === "student") {
+      router.push("/dashboard");
+    }
   } catch (error) {
     if (error && error.response && error.response.data) {
       console.error(error.response.data);

@@ -12,7 +12,7 @@
       <div class="flex justify-between">
         <button
           @click="retryPayment"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          class="bg-uil-400 text-white py-2 px-4 rounded hover:bg-uil-500"
         >
           Retry Payment
         </button>

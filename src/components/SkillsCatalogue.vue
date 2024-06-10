@@ -107,7 +107,7 @@
             class="bg-white p-4 rounded shadow"
           >
             <h2 class="text-xl font-bold">{{ skill.skill_name }}</h2>
-            <p class="mt-2">{{ skill.description }}</p>
+            <p class="mt-2">{{ truncate(skill.description, 50) }}</p>
             <!-- <div class="flex justify-normal"> -->
             <button
               @click="openModal(skill)"
@@ -140,6 +140,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import SkillModal from "./SkillModal.vue";
+import { truncate } from "@/utils/truncate.js";
 
 const toast = useToast();
 const user = ref({});
@@ -160,8 +161,12 @@ const openModal = (skill) => {
 const closeModal = () => (isModalOpen.value = false);
 
 const fetchSkills = async () => {
-  const { data } = await axios.get("http://localhost:5000/api/v1/skills");
-  skills.value = data;
+  try {
+    const { data } = await axios.get("http://localhost:5000/api/v1/skills");
+    skills.value = data;
+  } catch (error) {
+    console.error("An error occured while fetching skills", error);
+  }
 };
 
 const fetchUserDetails = async () => {

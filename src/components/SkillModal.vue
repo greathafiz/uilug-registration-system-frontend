@@ -23,15 +23,17 @@
       </button>
       <h2 class="text-2xl font-bold mb-4">{{ skill.skill_name }}</h2>
       <p class="mb-4">{{ skill.description }}</p>
-      <p class="mb-4">Available Slots: {{ skill.slots }}</p>
+      <p class="mb-4"><strong>Available Slots:</strong> {{ skill.slots }}</p>
+      <p class="mb-4"><strong>Venue:</strong> {{ skill.trainer.address }}</p>
       <p class="mb-4">
-        Trainer: {{ skill.trainer.trainer_name }}. Contact:
+        <strong>Trainer:</strong> {{ skill.trainer.trainer_name }}.
+        <strong>Contact:</strong>
         {{ skill.trainer.phone_number }}
       </p>
 
       <button
         @click="registerSkill(skill.skill_id)"
-        class="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+        class="mt-4 bg-uil-400 text-white py-2 px-4 rounded hover:bg-uil-500"
       >
         Register
       </button>
