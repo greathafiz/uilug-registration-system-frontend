@@ -95,7 +95,7 @@ const editTrainer = (trainer) => {
 const deleteTrainer = async (id) => {
   try {
     await axios.delete(
-      `${import.meta.env.VITE_API_BASE_URL_PROD}/skills/${id}`
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/trainers/${id}`
     );
     fetchTrainers();
   } catch (error) {

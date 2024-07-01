@@ -108,7 +108,9 @@ const saveSkill = async () => {
   try {
     if (props.isEditing) {
       await axios.patch(
-        `${import.meta.env.VITE_API_BASE_URL_PROD}/${skill.value.skill_id}`,
+        `${import.meta.env.VITE_API_BASE_URL_PROD}/skills/${
+          skill.value.skill_id
+        }`,
         {
           skill_name: skill.value.skill_name,
           description: skill.value.description,
