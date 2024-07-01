@@ -72,7 +72,7 @@ const onSubmit = async () => {
 
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/api/v1/auth/login",
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/auth/login`,
       userDetails
     );
     const token = data.access_token;

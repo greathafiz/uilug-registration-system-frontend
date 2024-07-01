@@ -57,7 +57,7 @@ const loadDetails = async () => {
   paymentReference.value = reference || "";
   try {
     const { data } = await axios.get(
-      `http://localhost:5000/api/v1/skills/${skillId}`
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/skills/${skillId}`
     );
     skill.value = data;
   } catch (error) {

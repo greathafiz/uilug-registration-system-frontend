@@ -98,11 +98,16 @@ const saveTrainer = async () => {
   try {
     if (props.isEditing) {
       await axios.patch(
-        `http://localhost:5000/api/v1/trainers/${trainer.value.trainer_id}`,
+        `${import.meta.env.VITE_API_BASE_URL_PROD}/trainers/${
+          trainer.value.trainer_id
+        }`,
         trainer.value
       );
     } else {
-      await axios.post("http://localhost:5000/api/v1/trainers", trainer.value);
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL_PROD}/trainers`,
+        trainer.value
+      );
     }
     emit("save");
     close();

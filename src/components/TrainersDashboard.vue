@@ -68,7 +68,9 @@ const isEditing = ref(false);
 
 const fetchTrainers = async () => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/v1/trainers");
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/trainers`
+    );
     trainers.value = data;
   } catch (error) {
     console.error("An error occured while fetching trainers", error);
@@ -92,7 +94,9 @@ const editTrainer = (trainer) => {
 
 const deleteTrainer = async (id) => {
   try {
-    await axios.delete(`http://localhost:5000/api/v1/skills/${id}`);
+    await axios.delete(
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/skills/${id}`
+    );
     fetchTrainers();
   } catch (error) {
     console.error("Error deleting trainer:", error);

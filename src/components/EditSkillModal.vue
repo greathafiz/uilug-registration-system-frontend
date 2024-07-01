@@ -108,7 +108,7 @@ const saveSkill = async () => {
   try {
     if (props.isEditing) {
       await axios.patch(
-        `http://localhost:5000/api/v1/skills/${skill.value.skill_id}`,
+        `${import.meta.env.VITE_API_BASE_URL_PROD}/${skill.value.skill_id}`,
         {
           skill_name: skill.value.skill_name,
           description: skill.value.description,
@@ -117,7 +117,10 @@ const saveSkill = async () => {
         }
       );
     } else {
-      await axios.post("http://localhost:5000/api/v1/skills", skill.value);
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL_PROD}/skills`,
+        skill.value
+      );
     }
     emit("save");
     close();

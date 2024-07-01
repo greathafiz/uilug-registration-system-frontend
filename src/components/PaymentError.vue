@@ -10,12 +10,12 @@
         support team for assistance.
       </p>
       <div class="flex justify-between">
-        <button
-          @click="retryPayment"
+        <router-link
+          to="/dashboard"
           class="bg-uil-400 text-white py-2 px-4 rounded hover:bg-uil-500"
         >
           Retry Payment
-        </button>
+        </router-link>
         <button
           @click="contactSupport"
           class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
@@ -28,17 +28,10 @@
 </template>
 
 <script setup>
-const retryPayment = () => {
-  // Logic to retry the payment process
-  // This could redirect to the payment page or re-initiate the payment request
-  console.log("Retrying payment...");
-  // Redirect to payment page or re-initiate payment request here
-};
-
 const contactSupport = () => {
   // Logic to contact support
-  // This could redirect to a support page or open a mailto link
-  //   console.log("Contacting support...");
+  // This redirects to a support page or open a mailto link
+  console.log("Contacting support...");
   window.location.href = "https://paystack.com/contact/support";
 };
 </script>

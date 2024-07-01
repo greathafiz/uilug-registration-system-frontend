@@ -61,7 +61,9 @@ const showModal = ref(false);
 
 const fetchStudents = async () => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/v1/students");
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/students`
+    );
     students.value = data;
   } catch (error) {
     console.error("Error fetching students:", error);

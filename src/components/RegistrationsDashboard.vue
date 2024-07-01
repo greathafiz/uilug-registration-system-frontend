@@ -40,7 +40,7 @@ const registrations = ref([]);
 const fetchRegistrations = async () => {
   try {
     const { data: regsData } = await axios.get(
-      "http://localhost:5000/api/v1/registrations"
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/registrations`
     );
     regsData.forEach((reg) => {
       reg.date_registered = formatDate(reg.date_registered);

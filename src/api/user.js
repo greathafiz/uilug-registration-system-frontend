@@ -6,7 +6,7 @@ const loginUser = async () => {
 const getUserProfile = async () => {
   try {
     const { data } = await axios.get(
-      "http://localhost:5000/api/v1/auth/profile"
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/auth/profile`
     );
     return data;
   } catch (error) {

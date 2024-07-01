@@ -162,7 +162,9 @@ const closeModal = () => (isModalOpen.value = false);
 
 const fetchSkills = async () => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/v1/skills");
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/skills`
+    );
     skills.value = data;
   } catch (error) {
     console.error("An error occured while fetching skills", error);
@@ -172,7 +174,7 @@ const fetchSkills = async () => {
 const fetchUserDetails = async () => {
   try {
     const { data } = await axios.get(
-      "http://localhost:5000/api/v1/auth/profile"
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/auth/profile`
     );
     user.value = data;
   } catch (error) {
@@ -183,7 +185,7 @@ const fetchUserDetails = async () => {
 const registerSkill = async (studentId, skillId) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/api/v1/payments/initialize",
+      `${import.meta.env.VITE_API_BASE_URL_PROD}/payments/initialize`,
       {
         student_id: studentId,
         skill_id: skillId,
@@ -197,7 +199,8 @@ const registerSkill = async (studentId, skillId) => {
     console.error(error.response.data);
 
     if (error.response.data.statusCode === 400) {
-      toast.error(`You can't register twice.`);
+      // console.log(error.response.data.response);
+      toast.error(error.response.data.response);
     } else {
       toast.error("An error occured while registering. Please try again.");
     }
