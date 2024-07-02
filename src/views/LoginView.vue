@@ -27,9 +27,9 @@
         />
         <PasswordInput ref="passwordInput" @password-entered="handlePassword" />
 
-        <div class="text-right cursor-pointer text-uil-500 hover:text-uil-400">
+        <!-- <div class="text-right cursor-pointer text-uil-500 hover:text-uil-400">
           Forgot Password?
-        </div>
+        </div> -->
 
         <button
           class="w-full text-white bg-uil-500 py-2 rounded font-bold cursor-pointer hover:bg-uil-400"
