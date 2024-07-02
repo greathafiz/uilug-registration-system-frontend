@@ -81,18 +81,24 @@ const onSubmit = async () => {
     localStorage.setItem("accessToken", token);
     localStorage.setItem("userRole", role);
 
-    if (role === "admin") {
-      router.push("/admin");
-    } else if (role === "student") {
-      router.push("/dashboard");
-    }
+    role === "admin" ? router.push("/admin") : router.push("/dashboard");
   } catch (error) {
-    if (error && error.response && error.response.data) {
-      console.error(error.response.data);
+    if (error.response.data.response.message === "Your password is incorrect") {
+      toast.error(error.response.data.response.message);
+    } else if (
+      error.response.data.response === "GSE301 not among registered courses"
+    ) {
+      toast.error(error.response.data.response);
     } else {
-      console.error("Login failed", error);
+      // console.log(error.response.data.response);
+      const portalErrorMessage = JSON.parse(error.response.data.response).errors
+        .username[0];
+      toast.error(
+        error.response.data.response.message ||
+          portalErrorMessage ||
+          "Login failed. Please try again."
+      );
     }
-    toast.error("Login failed. Please try again.");
   } finally {
     id.value = "";
     if (

@@ -22,7 +22,6 @@ axios.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Token is invalid or expired
       localStorage.removeItem("accessToken");
-      window.location.href = "/"; // Redirect to login
     }
     return Promise.reject(error);
   }
