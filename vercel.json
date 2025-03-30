@@ -1,0 +1,22 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://gseportal.vercel.app/:path*",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "gseportal.vercel.app"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false
+}
